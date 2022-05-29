@@ -1,65 +1,50 @@
 package com.isep.rpg;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public abstract class Hero {
+    //Paramètres
+    private String name;
     private int lifePoints;
     private int armor;
     private int weaponDamage;
-    private List<Potion> potions;
-    private List<Food> lembas;
+    private List<Potion> potions = new ArrayList<Potion>();
+    public List<Food> lembas = new ArrayList<Food>();
 
-    public Hero(int lifePoints, int armor, int weaponDamage){
+    //Constructeur
+    public Hero(String name, int lifePoints, int armor, int weaponDamage, List<Potion> potions, List<Food> lembas) {
+        this.name = name;
         this.lifePoints = lifePoints;
         this.armor = armor;
         this.weaponDamage = weaponDamage;
+        this.potions = potions;
+        this.lembas = lembas;
     }
 
+    //Implémentation des méthodes abstraites héritées de la classe Hero
+    public abstract void attack();
+    public abstract void defend();
+    public abstract void useConsumable(); //Consumable
+
+    //Getters
     public int getLifePoints() {
         return lifePoints;
-    }
-
-    public void setLifePoints(int lifePoints) {
-        this.lifePoints = lifePoints;
     }
 
     public int getArmor() {
         return armor;
     }
 
-    public void setArmor(int armor) {
-        this.armor = armor;
-    }
-
     public int getWeaponDamage() {
         return weaponDamage;
-    }
-
-    public void setWeaponDamage(int weaponDamage) {
-        this.weaponDamage = weaponDamage;
     }
 
     public List<Potion> getPotions() {
         return potions;
     }
 
-    public void setPotions(List<Potion> potions) {
-        this.potions = potions;
-    }
-
     public List<Food> getLembas() {
         return lembas;
     }
-
-    public void setLembas(List<Food> lembas) {
-        this.lembas = lembas;
-    }
-
-    public void attack(){}
-    public void defend(){}
-    public void useConsumable(){
-        //useConsumable(Consumable)
-    }
-
 }
