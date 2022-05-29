@@ -21,7 +21,7 @@ public class Warrior extends Hero{
     }
 
     @Override
-    public void useConsumable() { //Consumable p
+    public void useConsumable() { //Consumable en paramètre
         System.out.println("Warrior uses a consumable");
     }
 }

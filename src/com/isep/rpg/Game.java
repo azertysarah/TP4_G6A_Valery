@@ -80,11 +80,11 @@ public class Game {
         //L'ordre d'attaque des joueurs et des ennemis est déterminé aléatoirement au début de chaque combat
         //On crée donc une liste qui regroupe à la fois les héros et les ennemis et dans une boucle on va sélectionner
         //aléatoirement des éléments de la liste 'characters' pour les placer dans la liste 'randomCharacters'
-        for (int i = 0; i<totalNumberOfHeroes; i++){
+        for (int i = 0; i<totalNumberOfHeroes; i++){        //On regroupe les lites heroes et enemies dans une liste
             charactersString.add(heroesString.get(i));
             charactersString.add(enemiesString.get(i));
         }
-        for (int i=0; i<(2*totalNumberOfHeroes); i++){
+        for (int i=0; i<(2*totalNumberOfHeroes); i++){      //On prends au hasard un élément de la liste characterString et on le place dans une autre liste
             Random random = new Random();
             int randomNumber = random.nextInt(charactersString.size());
             randomCharactersString.add(charactersString.get(randomNumber));
@@ -93,33 +93,30 @@ public class Game {
         System.out.println("Character's order of attack: "+randomCharactersString);
     }
 
-    //Créer les personnages
-    static public void generateCharacter(){
-    }
-
-    //Tant qu'il y a encore des personnages,
+    //Tant qu'il y a encore des personnages, on fait jouer un personnage en suivant l'ordre de la liste randomCharacterString
     static public void generateCombat(){
         while(heroes!=null || enemies!=null) {
             for(int i=0; i<randomCharactersString.size();i++){
-                if (randomCharactersString.get(i).contains("BOSS")){
+                String characterToPlay = randomCharactersString.get(i);
+                if (characterToPlay.contains("BOSS")){
                     //computerTurnBoss();
                     Random random = new Random();
                     int randomHeroToAttack = random.nextInt(heroes.size());
 
-                    System.out.println(randomCharactersString.get(i) + "attacked" + heroes.get(randomHeroToAttack));
+                    System.out.println(characterToPlay + "attacked" + heroes.get(randomHeroToAttack));
                    // System.out.println("Your hero has" + lifePoints + "left");
 
-                }else if(randomCharactersString.get(i).contains("Monster")){
+                }else if(characterToPlay.contains("Monster")){
                     computerTurnBasicMonster();
                 }else{
-                    System.out.println("What do you want to do with "+ randomCharactersString.get(i)+ "\n" +
+                    System.out.println("What do you want to do with "+ characterToPlay+ "\n" +
                             "[1]: Attack \n" +
                             "[2]: Defend \n" +
                             "[3]: Use a consumable \n");
                     Scanner scanner = new Scanner(System.in);
                     int actionPlayer = scanner.nextInt();
                     //verifyActionPlayer()
-                    playerTurn(randomCharactersString.get(i),actionPlayer);
+                    playerTurn(characterToPlay,actionPlayer);
                     break;
                 }
             }
